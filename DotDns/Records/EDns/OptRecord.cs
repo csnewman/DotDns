@@ -50,13 +50,13 @@ namespace DotDns.Records.EDns
                 var childBuffer = buffer.Slice(0, buffer.Position + optionLength, true);
                 buffer.Advance(optionLength);
 
-                if (!childBuffer.AtEnd()) throw new ArgumentException("Option data was not fully read");
-
                 EDnsOption option = code switch
                 {
                     EDnsOptionCode.Cookie => new CookieOption(ref childBuffer, optionLength),
                     _ => throw new ArgumentOutOfRangeException(nameof(code), code, "Unknown option code")
                 };
+
+                if (!childBuffer.AtEnd()) throw new ArgumentException("Option data was not fully read");
 
                 _options.Add(option);
             }
