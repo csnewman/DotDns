@@ -90,7 +90,7 @@ namespace DotDns
                         continue;
                     case '.' when !escaped:
                     {
-                        var wrote = (byte) Encoding.ASCII.GetBytes(label, _buffer.Slice(Position));
+                        var wrote = (byte) Encoding.ASCII.GetBytes(label.Slice(0, length), _buffer.Slice(Position));
                         _buffer[lengthPos] = wrote;
                         length = 0;
 
@@ -114,7 +114,7 @@ namespace DotDns
 
             if (length != 0)
             {
-                var wrote = (byte) Encoding.ASCII.GetBytes(label, _buffer.Slice(Position));
+                var wrote = (byte) Encoding.ASCII.GetBytes(label.Slice(0, length), _buffer.Slice(Position));
                 _buffer[lengthPos] = wrote;
                 Position += wrote;
                 _buffer[Position++] = 0;

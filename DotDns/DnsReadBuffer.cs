@@ -75,7 +75,7 @@ namespace DotDns
                 switch (pointerType)
                 {
                     case 0b00: // Label
-                        ReadFixedLengthString(pointerValue);
+                        domain.Append(ReadFixedLengthString(pointerValue));
                         domain.Append('.');
                         pointer = _buffer[Position++];
                         break;
